@@ -1,88 +1,148 @@
-# Kelontong.id — Sistem Manajemen Toko Kelontong (Laravel + MySQL)
+# 🛒 Kelontong.id
 
-Versi lengkap dengan 5 tabel berelasi, transaksi kasir multi-item (seperti struk belanja), dan dashboard laporan bergrafik.
+**Kelontong.id** adalah aplikasi **Sistem Manajemen Toko Kelontong** berbasis **Laravel 11** dan **MySQL** yang dirancang untuk membantu pengelolaan data produk, kategori, supplier, transaksi kasir multi-item, serta laporan penjualan dalam satu dashboard yang sederhana dan mudah digunakan.
 
-## Struktur Relasi Database
+---
+
+## ✨ Fitur Utama
+
+### 📦 Manajemen Data
+- CRUD Kategori
+- CRUD Supplier
+- CRUD Produk
+- Relasi Produk dengan Kategori
+- Relasi Produk dengan Supplier
+
+### 💳 Sistem Kasir
+- Transaksi multi-item (seperti struk minimarket)
+- Tambah dan hapus item transaksi secara dinamis
+- Perhitungan subtotal dan total otomatis
+- Nomor transaksi otomatis (`TRX-XXXXXXXX`)
+- Validasi stok agar tidak bernilai negatif
+- Pengurangan stok otomatis setelah transaksi
+- Detail transaksi (struk)
+- Hapus transaksi akan mengembalikan stok
+
+### 📊 Dashboard
+- Total Produk
+- Total Transaksi
+- Total Pendapatan
+- Produk dengan stok menipis
+- Grafik penjualan 7 hari terakhir
+- Grafik 5 produk terlaris
+- Tabel stok menipis
+
+---
+
+# 🗄️ Struktur Relasi Database
 
 ```
-Kategori (1) ──< Produk >── (1) Supplier
-                   │
-                   └──< TransaksiDetail >── (1) Transaksi
+Kategori (1)
+      │
+      ▼
+   Produk
+      ▲
+      │
+Supplier (1)
+
+Produk (1)
+      │
+      ▼
+TransaksiDetail
+      ▲
+      │
+Transaksi (1)
 ```
 
-- **Kategori** punya banyak **Produk**
-- **Supplier** memasok banyak **Produk** (opsional, boleh kosong)
-- **Produk** muncul di banyak **TransaksiDetail** (baris item nota)
-- **Transaksi** (nota/header) punya banyak **TransaksiDetail** — inilah yang membuat 1 transaksi bisa berisi banyak produk sekaligus, seperti struk kasir sungguhan
+Relasi:
 
-## Fitur
+- Satu kategori memiliki banyak produk.
+- Satu supplier dapat memasok banyak produk.
+- Satu transaksi memiliki banyak detail transaksi.
+- Satu produk dapat muncul pada banyak transaksi.
 
-### CRUD dasar
-- Kategori — tambah/edit/hapus
-- Supplier — tambah/edit/hapus
-- Produk — tambah/edit/hapus (pilih kategori & supplier)
+---
 
-### Kasir (Transaksi multi-item)
-- Halaman "Transaksi Baru" punya form dinamis: tambah/hapus baris item dengan JavaScript
-- Subtotal per baris & total keseluruhan dihitung otomatis secara real-time di browser
-- Saat disimpan: nomor nota otomatis (`TRX-XXXXXXXX`), stok setiap produk yang terjual otomatis berkurang, validasi stok tidak boleh minus
-- Ada halaman "Lihat Struk" untuk detail nota
-- Hapus transaksi akan mengembalikan stok semua item di nota tersebut
+# 🛠️ Teknologi
 
-### Dashboard & Laporan
-- Kartu ringkasan: total produk, total transaksi, total pendapatan, jumlah produk stok menipis
-- Grafik garis: tren penjualan 7 hari terakhir (Chart.js)
-- Grafik batang: 5 produk terlaris
-- Tabel produk dengan stok menipis (≤5)
+- Laravel 11
+- PHP 8.2+
+- MySQL
+- Blade Template Engine
+- Bootstrap 5
+- JavaScript
+- Chart.js
 
-## Struktur file
+---
+
+# 📁 Struktur Project
 
 ```
 warungku/
 ├── app/
-│   ├── Models/
-│   │   ├── Kategori.php
-│   │   ├── Supplier.php
-│   │   ├── Produk.php
-│   │   ├── Transaksi.php
-│   │   └── TransaksiDetail.php
-│   └── Http/Controllers/
-│       ├── DashboardController.php
-│       ├── KategoriController.php
-│       ├── SupplierController.php
-│       ├── ProdukController.php
-│       └── TransaksiController.php
 ├── database/
-│   ├── migrations/
-│   │   ├── 2024_01_01_000001_1_create_suppliers_table.php
-│   │   ├── 2024_01_01_000001_create_kategoris_table.php
-│   │   ├── 2024_01_01_000002_create_produks_table.php
-│   │   ├── 2024_01_01_000003_create_transaksis_table.php
-│   │   └── 2024_01_01_000004_create_transaksi_details_table.php
-│   └── seeders/DatabaseSeeder.php
-├── routes/web.php
-└── resources/views/
-    ├── layouts/app.blade.php
-    ├── dashboard/index.blade.php
-    ├── kategori/{index,create,edit}.blade.php
-    ├── supplier/{index,create,edit}.blade.php
-    ├── produk/{index,create,edit}.blade.php
-    └── transaksi/{index,create,show}.blade.php   (tanpa edit — nota bersifat final)
+├── public/
+├── resources/
+├── routes/
+├── storage/
+├── .env
+└── README.md
 ```
 
-## Cara instalasi
+---
 
-### 1. Buat project Laravel baru
+# 🚀 Instalasi
+
+## 1. Clone Repository
+
 ```bash
-composer create-project laravel/laravel warungku
-cd warungku
+git clone https://github.com/username/kelontong-id.git
 ```
 
-### 2. Salin/timpa file dari paket ini
-Copy seluruh isi folder `app`, `database`, `routes`, `resources` dari paket ini ke project barumu (timpa file yang sudah ada seperti `routes/web.php` dan `database/seeders/DatabaseSeeder.php`).
+Masuk ke folder project
 
-### 3. Konfigurasi `.env`
-Laravel 11 defaultnya pakai SQLite — ganti ke MySQL:
+```bash
+cd kelontong-id
+```
+
+---
+
+## 2. Install Dependency
+
+```bash
+composer install
+```
+
+---
+
+## 3. Copy File Environment
+
+Linux / macOS
+
+```bash
+cp .env.example .env
+```
+
+Windows
+
+```bash
+copy .env.example .env
+```
+
+---
+
+## 4. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+---
+
+## 5. Konfigurasi Database
+
+Edit file `.env`
+
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -91,31 +151,238 @@ DB_DATABASE=kelontong_id
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-Setelah edit `.env`, jalankan:
+
+Kemudian bersihkan cache konfigurasi
+
 ```bash
 php artisan config:clear
 ```
 
-### 4. Buat database
+---
+
+## 6. Buat Database
+
 ```sql
 CREATE DATABASE kelontong_id;
 ```
 
-### 5. Migrasi & seed data contoh
-Kalau sebelumnya sudah pernah migrate dengan struktur lama (3 tabel), **wajib pakai `migrate:fresh`** supaya tabel lama (termasuk kolom `produk_id` di `transaksis`) dibuang dan dibuat ulang sesuai struktur baru:
+---
+
+## 7. Jalankan Migration
+
+Instalasi pertama
+
+```bash
+php artisan migrate --seed
+```
+
+Jika sebelumnya pernah menggunakan struktur lama
+
 ```bash
 php artisan migrate:fresh --seed
 ```
 
-### 6. Jalankan server
+---
+
+## 8. Jalankan Aplikasi
+
 ```bash
 php artisan serve
 ```
-Buka `http://127.0.0.1:8000` — akan diarahkan ke **Dashboard**.
 
-## Catatan penting
+Buka browser
 
-- **Transaksi tidak punya fitur Edit.** Ini disengaja — nota kasir umumnya bersifat final setelah dicetak/disimpan. Kalau salah input, hapus nota (stok otomatis dikembalikan) lalu buat transaksi baru.
-- Field `supplier_id` di tabel `produks` bersifat **nullable** — produk boleh tidak punya supplier.
-- Grafik dashboard pakai **Chart.js** via CDN, tidak perlu install package tambahan.
-- Kalau mau kembangkan lebih lanjut: tambah tabel `pembelian` (stok masuk dari supplier), sistem login/role (admin vs kasir), atau cetak struk ke PDF.
+```
+http://127.0.0.1:8000
+```
+
+---
+
+# 📖 Cara Penggunaan
+
+## 1. Tambahkan Kategori
+
+Menu **Kategori** → **Tambah Kategori**
+
+Contoh:
+
+- Makanan
+- Minuman
+- Sembako
+
+---
+
+## 2. Tambahkan Supplier
+
+Menu **Supplier** → **Tambah Supplier**
+
+Isi informasi supplier.
+
+Supplier bersifat opsional.
+
+---
+
+## 3. Tambahkan Produk
+
+Menu **Produk** → **Tambah Produk**
+
+Isi data:
+
+- Nama Produk
+- Harga
+- Stok
+- Kategori
+- Supplier (Opsional)
+
+Klik **Simpan**.
+
+---
+
+## 4. Membuat Transaksi
+
+Menu **Transaksi** → **Transaksi Baru**
+
+Langkah:
+
+1. Pilih produk.
+2. Tentukan jumlah pembelian.
+3. Tambahkan item lain jika diperlukan.
+4. Total akan dihitung otomatis.
+5. Klik **Simpan**.
+
+Setelah transaksi berhasil:
+
+- Nomor nota dibuat otomatis.
+- Stok produk berkurang otomatis.
+- Detail transaksi tersimpan.
+
+---
+
+## 5. Melihat Struk
+
+Menu **Transaksi**
+
+Klik tombol **Lihat**.
+
+Informasi yang ditampilkan:
+
+- Nomor Nota
+- Tanggal
+- Daftar Produk
+- Harga
+- Jumlah
+- Subtotal
+- Total Pembayaran
+
+---
+
+## 6. Menghapus Transaksi
+
+Saat transaksi dihapus:
+
+- Seluruh stok produk dikembalikan.
+- Detail transaksi ikut terhapus.
+- Data transaksi dihapus.
+
+---
+
+# 📊 Dashboard
+
+Dashboard menyediakan informasi:
+
+- Total Produk
+- Total Pendapatan
+- Total Transaksi
+- Produk stok menipis
+- Grafik penjualan 7 hari
+- Grafik produk terlaris
+
+---
+
+# 📌 Catatan
+
+- Produk tidak dapat dijual melebihi stok.
+- Supplier bersifat opsional.
+- Transaksi tidak dapat diedit.
+- Jika terjadi kesalahan input, hapus transaksi kemudian buat transaksi baru.
+- Dashboard menggunakan Chart.js melalui CDN.
+
+---
+
+# 🔮 Pengembangan Selanjutnya
+
+Beberapa fitur yang dapat dikembangkan:
+
+- Login Multi Role
+- Barcode Scanner
+- Cetak Struk PDF
+- Export Excel
+- Import Produk
+- Pembelian Barang
+- Retur Barang
+- Laporan Bulanan
+- Manajemen Pelanggan
+
+---
+
+# 👨‍💻 Developer
+
+Project ini dikembangkan oleh:
+
+- **Ikhlas Nawaalullah**
+- **Aqil Arsalan Rukmandani**
+- **Febry Febriansyah**
+- **Andi Adi Saputra**
+
+---
+
+# 🤝 Contributors
+
+Kami terbuka terhadap kontribusi.
+
+Langkah kontribusi:
+
+1. Fork repository
+2. Buat branch baru
+
+```bash
+git checkout -b fitur-baru
+```
+
+3. Commit perubahan
+
+```bash
+git commit -m "Menambahkan fitur baru"
+```
+
+4. Push
+
+```bash
+git push origin fitur-baru
+```
+
+5. Buat Pull Request
+
+---
+
+# 📄 License
+
+Project ini menggunakan lisensi **MIT License**.
+
+Lihat file **LICENSE** untuk informasi selengkapnya.
+
+---
+
+<div align="center">
+
+**Kelontong.id**
+
+*Sistem Manajemen Toko Kelontong Berbasis Laravel 11 & MySQL*
+
+© 2026
+
+Developed with ❤️ by
+
+**Ikhlas Nawaalullah • Aqil Arsalan Rukmandani • Febry Febriansyah • Andi Adi Saputra**
+
+</div>
