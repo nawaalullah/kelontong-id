@@ -375,14 +375,14 @@ Lihat file **LICENSE** untuk informasi selengkapnya.
 
 <div align="center">
 
-**Kelontong.id**
+# Kelontong.id
 
-*Sistem Manajemen Toko Kelontong Berbasis Laravel 11 & MySQL*
+**Sistem Manajemen Toko Kelontong Berbasis Laravel 11 & MySQL**
 
 © 2026
 
-Developed with ❤️ by
+**Project Team**
 
-**Ikhlas Nawaalullah • Aqil Arsalan Rukmandani • Febry Febriansyah • Andi Adi Saputra**
+Ikhlas Nawaalullah | Aqil Arsalan Rukmandani | Febry Febriansyah | Andi Adi Saputra
 
 </div>
