@@ -22,6 +22,7 @@
 - Pengurangan stok otomatis setelah transaksi
 - Detail transaksi (struk)
 - Hapus transaksi akan mengembalikan stok
+- Search untuk pencarian nama
 
 ### 📊 Dashboard
 - Total Produk
