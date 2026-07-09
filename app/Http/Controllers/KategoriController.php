@@ -9,10 +9,17 @@ use Illuminate\View\View;
 
 class KategoriController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $kategoris = Kategori::withCount('produk')->latest()->paginate(10);
-        return view('kategori.index', compact('kategoris'));
+        $search = $request->query('search');
+
+        $kategoris = Kategori::withCount('produk')
+            ->when($search, fn ($query) => $query->where('nama_kategori', 'like', "%{$search}%"))
+            ->latest()
+            ->paginate(10)
+            ->appends($request->query());
+
+        return view('kategori.index', compact('kategoris', 'search'));
     }
 
     public function create(): View

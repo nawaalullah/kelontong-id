@@ -9,10 +9,17 @@ use Illuminate\View\View;
 
 class SupplierController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $suppliers = Supplier::withCount('produk')->latest()->paginate(10);
-        return view('supplier.index', compact('suppliers'));
+        $search = $request->query('search');
+
+        $suppliers = Supplier::withCount('produk')
+            ->when($search, fn ($query) => $query->where('nama_supplier', 'like', "%{$search}%"))
+            ->latest()
+            ->paginate(10)
+            ->appends($request->query());
+
+        return view('supplier.index', compact('suppliers', 'search'));
     }
 
     public function create(): View

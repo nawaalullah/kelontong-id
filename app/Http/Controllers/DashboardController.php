@@ -63,6 +63,12 @@ class DashboardController extends Controller
         $labelTerlaris = $produkTerlaris->map(fn ($d) => $d->produk->nama_produk ?? '—');
         $dataTerlaris  = $produkTerlaris->pluck('total_terjual');
 
+        // Tabel: produk terdaftar (terbaru ditambahkan)
+        $produkTerdaftar = Produk::with('kategori')
+            ->orderByDesc('created_at')
+            ->limit(10)
+            ->get();
+
         // Tabel: produk dengan stok menipis (belum habis)
         $stokMenipis = Produk::with('kategori')->where('stok', '<=', 5)->where('stok', '>', 0)->orderBy('stok')->limit(10)->get();
 
@@ -95,6 +101,7 @@ class DashboardController extends Controller
             'dataQris',
             'labelTerlaris',
             'dataTerlaris',
+            'produkTerdaftar',
             'stokMenipis',
             'stokHabis',
             'produkKadaluarsa'

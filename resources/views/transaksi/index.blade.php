@@ -13,6 +13,19 @@
         </a>
     </div>
 
+    <form action="{{ route('transaksi.index') }}" method="GET" class="flex items-center gap-3 mb-4">
+        <div class="relative flex-1 max-w-xs">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-300"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" name="search" value="{{ $search }}" placeholder="Cari nama pelanggan..."
+                   class="w-full rounded-lg border border-ink-100 pl-9 pr-3 py-2 text-sm text-ink-700 placeholder:text-ink-300 focus:outline-none focus:ring-2 focus:ring-mustard-300">
+        </div>
+        <button type="submit"
+                class="rounded-lg bg-ink-700 hover:bg-ink-800 text-white text-sm font-semibold px-4 py-2 transition-colors">Cari</button>
+        @if ($search)
+            <a href="{{ route('transaksi.index') }}" class="text-xs text-ink-400 hover:text-clay-600 underline">Reset</a>
+        @endif
+    </form>
+
     <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -62,7 +75,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="px-5 py-10 text-center text-ink-400">Belum ada data transaksi.</td>
+                            <td colspan="8" class="px-5 py-10 text-center text-ink-400">
+                                @if ($search)
+                                    Tidak ada transaksi dengan nama pelanggan yang cocok dengan "{{ $search }}".
+                                @else
+                                    Belum ada data transaksi.
+                                @endif
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

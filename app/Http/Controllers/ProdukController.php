@@ -11,10 +11,17 @@ use Illuminate\View\View;
 
 class ProdukController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $produks = Produk::with(['kategori', 'supplier'])->latest()->paginate(10);
-        return view('produk.index', compact('produks'));
+        $search = $request->query('search');
+
+        $produks = Produk::with(['kategori', 'supplier'])
+            ->when($search, fn ($query) => $query->where('nama_produk', 'like', "%{$search}%"))
+            ->latest()
+            ->paginate(10)
+            ->appends($request->query());
+
+        return view('produk.index', compact('produks', 'search'));
     }
 
     public function create(): View
