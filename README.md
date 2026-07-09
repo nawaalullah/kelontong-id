@@ -96,7 +96,7 @@ warungku/
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/username/kelontong-id.git
+git clone https://github.com/nawaalullah/kelontong-id.git
 ```
 
 Masuk ke folder project
