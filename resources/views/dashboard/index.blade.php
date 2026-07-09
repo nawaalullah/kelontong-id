@@ -78,108 +78,140 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 xl:grid-cols-2 gap-5 mb-5">
-        <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
-            <div class="px-5 py-4 border-b border-ink-100">
-                <h2 class="font-display font-semibold text-ink-700">Produk dengan Stok Menipis</h2>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <thead>
-                        <tr class="text-left text-xs uppercase tracking-wider text-ink-400 bg-paper">
-                            <th class="px-5 py-3 font-semibold">Produk</th>
-                            <th class="px-5 py-3 font-semibold">Kategori</th>
-                            <th class="px-5 py-3 font-semibold">Sisa Stok</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-ink-100">
-                        @forelse ($stokMenipis as $produk)
-                            <tr class="hover:bg-paper/60">
-                                <td class="px-5 py-3 text-ink-700">{{ $produk->nama_produk }}</td>
-                                <td class="px-5 py-3 text-ink-500">{{ $produk->kategori->nama_kategori }}</td>
-                                <td class="px-5 py-3">
-                                    <span class="inline-flex items-center rounded-full bg-clay-50 text-clay-600 text-xs font-semibold px-2.5 py-1">{{ $produk->stok }}</span>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3" class="px-5 py-8 text-center text-ink-400">Semua stok aman.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
-            <div class="px-5 py-4 border-b border-ink-100">
-                <h2 class="font-display font-semibold text-ink-700">Produk dengan Stok Habis</h2>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <thead>
-                        <tr class="text-left text-xs uppercase tracking-wider text-ink-400 bg-paper">
-                            <th class="px-5 py-3 font-semibold">Produk</th>
-                            <th class="px-5 py-3 font-semibold">Kategori</th>
-                            <th class="px-5 py-3 font-semibold">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-ink-100">
-                        @forelse ($stokHabis as $produk)
-                            <tr class="hover:bg-paper/60">
-                                <td class="px-5 py-3 text-ink-700">{{ $produk->nama_produk }}</td>
-                                <td class="px-5 py-3 text-ink-500">{{ $produk->kategori->nama_kategori }}</td>
-                                <td class="px-5 py-3">
-                                    <span class="inline-flex items-center rounded-full bg-clay-100 text-clay-700 text-xs font-semibold px-2.5 py-1">Stok habis</span>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3" class="px-5 py-8 text-center text-ink-400">Tidak ada produk yang stoknya habis.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
-        <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
-            <div class="px-5 py-4 border-b border-ink-100">
-                <h2 class="font-display font-semibold text-ink-700">Produk Akan / Sudah Kadaluarsa</h2>
+        <div class="flex flex-col gap-5">
+            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
+                <div class="px-5 py-4 border-b border-ink-100">
+                    <h2 class="font-display font-semibold text-ink-700">Produk Terdaftar</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-xs uppercase tracking-wider text-ink-400 bg-paper">
+                                <th class="px-5 py-3 font-semibold">Produk</th>
+                                <th class="px-5 py-3 font-semibold">Kategori</th>
+                                <th class="px-5 py-3 font-semibold">Stok</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-ink-100">
+                            @forelse ($produkTerdaftar as $produk)
+                                <tr class="hover:bg-paper/60">
+                                    <td class="px-5 py-3 text-ink-700">{{ $produk->nama_produk }}</td>
+                                    <td class="px-5 py-3 text-ink-500">{{ $produk->kategori->nama_kategori ?? '—' }}</td>
+                                    <td class="px-5 py-3 text-ink-500">{{ $produk->stok }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="px-5 py-8 text-center text-ink-400">Belum ada produk terdaftar.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <thead>
-                        <tr class="text-left text-xs uppercase tracking-wider text-ink-400 bg-paper">
-                            <th class="px-5 py-3 font-semibold">Produk</th>
-                            <th class="px-5 py-3 font-semibold">Kategori</th>
-                            <th class="px-5 py-3 font-semibold">Tgl. Kadaluarsa</th>
-                            <th class="px-5 py-3 font-semibold">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-ink-100">
-                        @forelse ($produkKadaluarsa as $produk)
-                            <tr class="hover:bg-paper/60">
-                                <td class="px-5 py-3 text-ink-700">{{ $produk->nama_produk }}</td>
-                                <td class="px-5 py-3 text-ink-500">{{ $produk->kategori->nama_kategori }}</td>
-                                <td class="px-5 py-3 font-mono text-ink-500">{{ $produk->tanggal_kadaluarsa->format('d-m-Y') }}</td>
-                                <td class="px-5 py-3">
-                                    @if ($produk->status_kadaluarsa === 'expired')
-                                        <span class="inline-flex items-center rounded-full bg-clay-50 text-clay-600 text-xs font-semibold px-2.5 py-1">Sudah kadaluarsa</span>
-                                    @else
-                                        <span class="inline-flex items-center rounded-full bg-mustard-100 text-mustard-700 text-xs font-semibold px-2.5 py-1">{{ $produk->sisa_kadaluarsa_text }}</span>
-                                    @endif
-                                </td>
+
+            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
+                <div class="px-5 py-4 border-b border-ink-100">
+                    <h2 class="font-display font-semibold text-ink-700">Produk dengan Stok Menipis</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-xs uppercase tracking-wider text-ink-400 bg-paper">
+                                <th class="px-5 py-3 font-semibold">Produk</th>
+                                <th class="px-5 py-3 font-semibold">Kategori</th>
+                                <th class="px-5 py-3 font-semibold">Sisa Stok</th>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="px-5 py-8 text-center text-ink-400">Tidak ada produk yang akan kadaluarsa dalam 30 hari.</td>
+                        </thead>
+                        <tbody class="divide-y divide-ink-100">
+                            @forelse ($stokMenipis as $produk)
+                                <tr class="hover:bg-paper/60">
+                                    <td class="px-5 py-3 text-ink-700">{{ $produk->nama_produk }}</td>
+                                    <td class="px-5 py-3 text-ink-500">{{ $produk->kategori->nama_kategori }}</td>
+                                    <td class="px-5 py-3">
+                                        <span class="inline-flex items-center rounded-full bg-clay-50 text-clay-600 text-xs font-semibold px-2.5 py-1">{{ $produk->stok }}</span>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="px-5 py-8 text-center text-ink-400">Semua stok aman.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-5">
+            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
+                <div class="px-5 py-4 border-b border-ink-100">
+                    <h2 class="font-display font-semibold text-ink-700">Produk dengan Stok Habis</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-xs uppercase tracking-wider text-ink-400 bg-paper">
+                                <th class="px-5 py-3 font-semibold">Produk</th>
+                                <th class="px-5 py-3 font-semibold">Kategori</th>
+                                <th class="px-5 py-3 font-semibold">Status</th>
                             </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="divide-y divide-ink-100">
+                            @forelse ($stokHabis as $produk)
+                                <tr class="hover:bg-paper/60">
+                                    <td class="px-5 py-3 text-ink-700">{{ $produk->nama_produk }}</td>
+                                    <td class="px-5 py-3 text-ink-500">{{ $produk->kategori->nama_kategori }}</td>
+                                    <td class="px-5 py-3">
+                                        <span class="inline-flex items-center rounded-full bg-clay-100 text-clay-700 text-xs font-semibold px-2.5 py-1">Stok habis</span>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="px-5 py-8 text-center text-ink-400">Tidak ada produk yang stoknya habis.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
+                <div class="px-5 py-4 border-b border-ink-100">
+                    <h2 class="font-display font-semibold text-ink-700">Produk Akan / Sudah Kadaluarsa</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-xs uppercase tracking-wider text-ink-400 bg-paper">
+                                <th class="px-5 py-3 font-semibold">Produk</th>
+                                <th class="px-5 py-3 font-semibold">Kategori</th>
+                                <th class="px-5 py-3 font-semibold">Tgl. Kadaluarsa</th>
+                                <th class="px-5 py-3 font-semibold">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-ink-100">
+                            @forelse ($produkKadaluarsa as $produk)
+                                <tr class="hover:bg-paper/60">
+                                    <td class="px-5 py-3 text-ink-700">{{ $produk->nama_produk }}</td>
+                                    <td class="px-5 py-3 text-ink-500">{{ $produk->kategori->nama_kategori }}</td>
+                                    <td class="px-5 py-3 font-mono text-ink-500">{{ $produk->tanggal_kadaluarsa->format('d-m-Y') }}</td>
+                                    <td class="px-5 py-3">
+                                        @if ($produk->status_kadaluarsa === 'expired')
+                                            <span class="inline-flex items-center rounded-full bg-clay-50 text-clay-600 text-xs font-semibold px-2.5 py-1">Sudah kadaluarsa</span>
+                                        @else
+                                            <span class="inline-flex items-center rounded-full bg-mustard-100 text-mustard-700 text-xs font-semibold px-2.5 py-1">{{ $produk->sisa_kadaluarsa_text }}</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="px-5 py-8 text-center text-ink-400">Tidak ada produk yang akan kadaluarsa dalam 30 hari.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

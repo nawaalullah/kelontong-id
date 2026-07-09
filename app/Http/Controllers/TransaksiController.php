@@ -13,10 +13,17 @@ use Illuminate\Support\Str;
 
 class TransaksiController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $transaksis = Transaksi::withCount('detail')->latest()->paginate(10);
-        return view('transaksi.index', compact('transaksis'));
+        $search = $request->query('search');
+
+        $transaksis = Transaksi::withCount('detail')
+            ->when($search, fn ($query) => $query->where('nama_pelanggan', 'like', "%{$search}%"))
+            ->latest()
+            ->paginate(10)
+            ->appends($request->query());
+
+        return view('transaksi.index', compact('transaksis', 'search'));
     }
 
     public function create(): View
