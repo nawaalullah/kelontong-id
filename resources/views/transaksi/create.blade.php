@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="max-w-4xl">
-        <div class="rounded-xl bg-white border border-ink-100 shadow-paper p-6">
+        <div class="rounded-xl bg-white border border-ink-100 shadow-paper p-6 dark:bg-slate-900 dark:border-slate-700">
             <form action="{{ route('transaksi.store') }}" method="POST" id="formTransaksi">
                 @csrf
 
@@ -25,13 +25,13 @@
                 <div class="mb-6">
                     <label class="block text-sm font-semibold text-ink-700 mb-1.5">Metode Pembayaran</label>
                     <div class="grid grid-cols-2 gap-3 max-w-xs">
-                        <label class="metode-option relative flex items-center justify-center rounded-lg border-2 border-mustard-400 bg-mustard-50 px-4 py-3 text-sm font-semibold text-ink-700 cursor-pointer transition-colors">
+                        <label class="metode-option relative flex items-center justify-center rounded-lg border-2 border-mustard-400 bg-mustard-50 px-4 py-3 text-sm font-semibold text-ink-700 cursor-pointer transition-colors dark:border-slate-700 dark:bg-slate-800">
                             <input type="radio" name="metode_pembayaran" value="cash"
                                    {{ old('metode_pembayaran', 'cash') === 'cash' ? 'checked' : '' }}
                                    class="metode-radio absolute opacity-0 inset-0 cursor-pointer">
                             Cash
                         </label>
-                        <label class="metode-option relative flex items-center justify-center rounded-lg border-2 border-ink-100 px-4 py-3 text-sm font-semibold text-ink-500 cursor-pointer transition-colors">
+                        <label class="metode-option relative flex items-center justify-center rounded-lg border-2 border-ink-100 px-4 py-3 text-sm font-semibold text-ink-500 cursor-pointer transition-colors dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
                             <input type="radio" name="metode_pembayaran" value="qris"
                                    {{ old('metode_pembayaran') === 'qris' ? 'checked' : '' }}
                                    class="metode-radio absolute opacity-0 inset-0 cursor-pointer">
@@ -77,7 +77,7 @@
                     <button type="submit"
                             class="rounded-lg bg-mustard-400 hover:bg-mustard-500 text-ink-800 font-semibold text-sm px-5 py-2.5 shadow-paper transition-colors">Simpan Transaksi</button>
                     <a href="{{ route('transaksi.index') }}"
-                       class="rounded-lg border border-ink-100 text-ink-500 hover:bg-paper text-sm font-medium px-5 py-2.5 transition-colors">Batal</a>
+                       class="rounded-lg border border-ink-100 text-ink-500 hover:bg-paper text-sm font-medium px-5 py-2.5 transition-colors dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Batal</a>
                 </div>
             </form>
         </div>
@@ -88,7 +88,7 @@
 
         let rowIndex = 0;
 
-        const inputClass = 'w-full rounded-md border border-ink-100 bg-paper/40 px-2.5 py-1.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400';
+        const inputClass = 'w-full rounded-md border border-ink-100 bg-paper/40 px-2.5 py-1.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100';
 
         function buatOptionProduk(selectedId = '') {
             let opts = '<option value="">-- Pilih Produk --</option>';

@@ -12,6 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -44,6 +45,16 @@
                 },
             },
         };
+
+        (function () {
+            const storedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const shouldUseDark = storedTheme === 'dark' || (!storedTheme && prefersDark);
+
+            if (shouldUseDark) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
     </script>
 
     <style>
@@ -53,9 +64,32 @@
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-thumb { background: #D3DCD5; border-radius: 999px; }
         [x-cloak] { display: none !important; }
+
+        .dark .bg-white { background-color: #0f172a !important; }
+        .dark .bg-white\/90 { background-color: rgba(15, 23, 42, 0.9) !important; }
+        .dark .bg-white\/80 { background-color: rgba(15, 23, 42, 0.8) !important; }
+        .dark .bg-white\/50 { background-color: rgba(15, 23, 42, 0.5) !important; }
+        .dark .bg-white\/5 { background-color: rgba(255, 255, 255, 0.05) !important; }
+        .dark .bg-paper { background-color: #111827 !important; }
+        .dark .bg-paper\/90 { background-color: rgba(15, 23, 42, 0.9) !important; }
+        .dark .bg-paper\/40 { background-color: rgba(15, 23, 42, 0.4) !important; }
+        .dark .bg-paper\/60 { background-color: rgba(15, 23, 42, 0.6) !important; }
+        .dark .hover\:bg-white:hover { background-color: rgba(255, 255, 255, 0.08) !important; }
+        .dark .hover\:bg-white\/5:hover { background-color: rgba(255, 255, 255, 0.05) !important; }
+        .dark .hover\:bg-paper\/60:hover { background-color: rgba(15, 23, 42, 0.6) !important; }
+        .dark .border-ink-100 { border-color: #334155 !important; }
+        .dark .border-white\/10 { border-color: rgba(255, 255, 255, 0.12) !important; }
+        .dark .text-ink-700 { color: #e2e8f0 !important; }
+        .dark .text-ink-500 { color: #94a3b8 !important; }
+        .dark .text-ink-400 { color: #cbd5e1 !important; }
+        .dark .text-ink-300 { color: #cbd5e1 !important; }
+        .dark .bg-ink-50 { background-color: #0f172a !important; }
+        .dark .bg-leaf-50 { background-color: #122b1a !important; }
+        .dark .bg-clay-50 { background-color: #2b1011 !important; }
+        .dark .shadow-paper { box-shadow: 0 1px 2px rgba(255, 255, 255, 0.04), 0 4px 14px rgba(255, 255, 255, 0.04) !important; }
     </style>
 </head>
-<body class="bg-paper text-ink-700 antialiased">
+<body class="bg-paper text-ink-700 antialiased dark:bg-slate-950 dark:text-slate-100">
     <div class="min-h-screen flex" x-data="{ sidebarOpen: false }">
 
         <!-- Sidebar -->
@@ -114,14 +148,24 @@
 
         <!-- Main -->
         <div class="flex-1 flex flex-col min-w-0 lg:pl-64">
-            <header class="sticky top-0 z-10 bg-paper/90 backdrop-blur border-b border-ink-100 px-4 sm:px-8 py-4 flex items-center gap-4">
-                <button @click="sidebarOpen = true" class="lg:hidden text-ink-600 -ml-1 p-1">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-                </button>
-                <div class="min-w-0">
-                    <p class="text-[11px] uppercase tracking-widest text-mustard-600 font-semibold">@yield('eyebrow', 'Kelontong.id')</p>
-                    <h1 class="font-display text-xl sm:text-2xl font-semibold text-ink-700 truncate">@yield('title', 'Dashboard')</h1>
+            <header class="sticky top-0 z-10 bg-paper/90 backdrop-blur border-b border-ink-100 px-4 sm:px-8 py-4 flex items-center justify-between gap-4 dark:bg-slate-900/90 dark:border-slate-700">
+                <div class="flex items-center gap-3">
+                    <button @click="sidebarOpen = true" class="lg:hidden text-ink-600 -ml-1 p-1">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                    <div class="min-w-0">
+                        <p class="text-[11px] uppercase tracking-widest text-mustard-600 font-semibold">@yield('eyebrow', 'Kelontong.id')</p>
+                        <h1 class="font-display text-xl sm:text-2xl font-semibold text-ink-700 dark:text-slate-100 truncate">@yield('title', 'Dashboard')</h1>
+                    </div>
                 </div>
+                <button id="themeToggleBtn"
+                        type="button"
+                        onclick="toggleTheme()"
+                        class="inline-flex items-center justify-center rounded-full border border-ink-200 bg-white/90 text-ink-700 p-2 shadow-sm transition hover:bg-mustard-50 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-100 dark:hover:bg-slate-700/80"
+                        aria-label="Toggle dark mode">
+                    <span data-light class="text-lg">🌙</span>
+                    <span data-dark class="hidden text-lg">☀️</span>
+                </button>
             </header>
 
             <main class="flex-1 px-4 sm:px-8 py-6 sm:py-8">
@@ -152,6 +196,26 @@
         </div>
     </div>
 
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeToggle(isDark);
+        }
+
+        function updateThemeToggle(isDark = document.documentElement.classList.contains('dark')) {
+            const button = document.getElementById('themeToggleBtn');
+            if (!button) return;
+            button.querySelector('[data-light]').classList.toggle('hidden', isDark);
+            button.querySelector('[data-dark]').classList.toggle('hidden', !isDark);
+            button.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateThemeToggle();
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
 </body>
 </html>

@@ -5,24 +5,24 @@
 
 @section('content')
     <div class="max-w-xl">
-        <div class="rounded-xl bg-white border border-ink-100 shadow-paper p-6">
+        <div class="rounded-xl bg-white border border-ink-100 shadow-paper p-6 dark:bg-slate-900 dark:border-slate-700">
             <form action="{{ route('supplier.update', $supplier) }}" method="POST" class="space-y-5">
                 @csrf
                 @method('PUT')
                 <div>
                     <label class="block text-sm font-semibold text-ink-700 mb-1.5">Nama Supplier</label>
                     <input type="text" name="nama_supplier" value="{{ old('nama_supplier', $supplier->nama_supplier) }}" required
-                           class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400">
+                           class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-ink-700 mb-1.5">Kontak (No. HP/Telepon)</label>
+                    <label class="block text-sm font-semibold text-ink-700 dark:text-slate-200 mb-1.5">Kontak (No. HP/Telepon)</label>
                     <input type="text" name="kontak" value="{{ old('kontak', $supplier->kontak) }}"
-                           class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400">
+                           class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-ink-700 mb-1.5">Alamat</label>
+                    <label class="block text-sm font-semibold text-ink-700 dark:text-slate-200 mb-1.5">Alamat</label>
                     <textarea name="alamat" rows="3"
-                              class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400">{{ old('alamat', $supplier->alamat) }}</textarea>
+                              class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">{{ old('alamat', $supplier->alamat) }}</textarea>
                 </div>
                 <div class="flex items-center gap-3 pt-2">
                     <button type="submit"

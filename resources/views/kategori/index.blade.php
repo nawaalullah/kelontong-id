@@ -26,7 +26,7 @@
         @endif
     </form>
 
-    <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
+    <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden dark:bg-slate-900 dark:border-slate-700">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead>

@@ -5,18 +5,18 @@
 
 @section('content')
     <div class="max-w-xl">
-        <div class="rounded-xl bg-white border border-ink-100 shadow-paper p-6">
+        <div class="rounded-xl bg-white border border-ink-100 shadow-paper p-6 dark:bg-slate-900 dark:border-slate-700">
             <form action="{{ route('kategori.store') }}" method="POST" class="space-y-5">
                 @csrf
                 <div>
                     <label class="block text-sm font-semibold text-ink-700 mb-1.5">Nama Kategori</label>
                     <input type="text" name="nama_kategori" value="{{ old('nama_kategori') }}" required
-                           class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400">
+                           class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-ink-700 mb-1.5">Deskripsi</label>
+                    <label class="block text-sm font-semibold text-ink-700 dark:text-slate-200 mb-1.5">Deskripsi</label>
                     <textarea name="deskripsi" rows="3"
-                              class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400">{{ old('deskripsi') }}</textarea>
+                              class="w-full rounded-lg border border-ink-100 bg-paper/40 px-3.5 py-2.5 text-sm text-ink-700 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">{{ old('deskripsi') }}</textarea>
                 </div>
                 <div class="flex items-center gap-3 pt-2">
                     <button type="submit"

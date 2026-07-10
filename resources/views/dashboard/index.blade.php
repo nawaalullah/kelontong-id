@@ -41,23 +41,23 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        <div class="rounded-xl bg-white border border-ink-100 p-5 shadow-paper">
+        <div class="rounded-xl bg-white border border-ink-100 p-5 shadow-paper dark:bg-slate-900 dark:border-slate-700">
             <p class="text-xs uppercase tracking-widest text-ink-400">Penjualan Hari Ini</p>
-            <p class="font-display font-semibold text-2xl mt-2 text-ink-700">Rp {{ number_format($totalPenjualanHariIni, 0, ',', '.') }}</p>
+            <p class="font-display font-semibold text-2xl mt-2 text-ink-700 dark:text-slate-100">Rp {{ number_format($totalPenjualanHariIni, 0, ',', '.') }}</p>
         </div>
-        <div class="rounded-xl bg-white border border-ink-100 p-5 shadow-paper">
+        <div class="rounded-xl bg-white border border-ink-100 p-5 shadow-paper dark:bg-slate-900 dark:border-slate-700">
             <p class="text-xs uppercase tracking-widest text-ink-400">Cash Hari Ini</p>
             <p class="font-display font-semibold text-2xl mt-2 text-mustard-600">Rp {{ number_format($totalCashHariIni, 0, ',', '.') }}</p>
         </div>
-        <div class="rounded-xl bg-white border border-ink-100 p-5 shadow-paper">
+        <div class="rounded-xl bg-white border border-ink-100 p-5 shadow-paper dark:bg-slate-900 dark:border-slate-700">
             <p class="text-xs uppercase tracking-widest text-ink-400">QRIS Hari Ini</p>
             <p class="font-display font-semibold text-2xl mt-2 text-leaf-600">Rp {{ number_format($totalQrisHariIni, 0, ',', '.') }}</p>
         </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-5 mb-8">
-        <div class="lg:col-span-3 rounded-xl bg-white border border-ink-100 shadow-paper">
-            <div class="px-5 py-4 border-b border-ink-100">
+        <div class="lg:col-span-3 rounded-xl bg-white border border-ink-100 shadow-paper dark:bg-slate-900 dark:border-slate-700">
+            <div class="px-5 py-4 border-b border-ink-100 dark:border-slate-700">
                 <h2 class="font-display font-semibold text-ink-700">Penjualan 7 Hari Terakhir (Cash vs QRIS)</h2>
             </div>
             <div class="p-5">
@@ -66,8 +66,8 @@
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-2 rounded-xl bg-white border border-ink-100 shadow-paper">
-            <div class="px-5 py-4 border-b border-ink-100">
+        <div class="lg:col-span-2 rounded-xl bg-white border border-ink-100 shadow-paper dark:bg-slate-900 dark:border-slate-700">
+            <div class="px-5 py-4 border-b border-ink-100 dark:border-slate-700">
                 <h2 class="font-display font-semibold text-ink-700">5 Produk Terlaris</h2>
             </div>
             <div class="p-5">
@@ -80,9 +80,9 @@
 
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
         <div class="flex flex-col gap-5">
-            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
-                <div class="px-5 py-4 border-b border-ink-100">
-                    <h2 class="font-display font-semibold text-ink-700">Produk Terdaftar</h2>
+            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden dark:bg-slate-900 dark:border-slate-700">
+                <div class="px-5 py-4 border-b border-ink-100 dark:border-slate-700">
+                    <h2 class="font-display font-semibold text-ink-700 dark:text-slate-100">Produk Terdaftar</h2>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -110,9 +110,9 @@
                 </div>
             </div>
 
-            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
-                <div class="px-5 py-4 border-b border-ink-100">
-                    <h2 class="font-display font-semibold text-ink-700">Produk dengan Stok Menipis</h2>
+            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden dark:bg-slate-900 dark:border-slate-700">
+                <div class="px-5 py-4 border-b border-ink-100 dark:border-slate-700">
+                    <h2 class="font-display font-semibold text-ink-700 dark:text-slate-100">Produk dengan Stok Menipis</h2>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -144,9 +144,9 @@
         </div>
 
         <div class="flex flex-col gap-5">
-            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
-                <div class="px-5 py-4 border-b border-ink-100">
-                    <h2 class="font-display font-semibold text-ink-700">Produk dengan Stok Habis</h2>
+            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden dark:bg-slate-900 dark:border-slate-700">
+                <div class="px-5 py-4 border-b border-ink-100 dark:border-slate-700">
+                    <h2 class="font-display font-semibold text-ink-700 dark:text-slate-100">Produk dengan Stok Habis</h2>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -176,9 +176,9 @@
                 </div>
             </div>
 
-            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
-                <div class="px-5 py-4 border-b border-ink-100">
-                    <h2 class="font-display font-semibold text-ink-700">Produk Akan / Sudah Kadaluarsa</h2>
+            <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden dark:bg-slate-900 dark:border-slate-700">
+                <div class="px-5 py-4 border-b border-ink-100 dark:border-slate-700">
+                    <h2 class="font-display font-semibold text-ink-700 dark:text-slate-100">Produk Akan / Sudah Kadaluarsa</h2>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">

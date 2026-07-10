@@ -17,7 +17,7 @@
         <div class="relative flex-1 max-w-xs">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-300"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
             <input type="text" name="search" value="{{ $search }}" placeholder="Cari nama produk..."
-                   class="w-full rounded-lg border border-ink-100 pl-9 pr-3 py-2 text-sm text-ink-700 placeholder:text-ink-300 focus:outline-none focus:ring-2 focus:ring-mustard-300">
+                   class="w-full rounded-lg border border-ink-100 bg-white pl-9 pr-3 py-2 text-sm text-ink-700 placeholder:text-ink-300 focus:outline-none focus:ring-2 focus:ring-mustard-300 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-400">
         </div>
         <button type="submit"
                 class="rounded-lg bg-ink-700 hover:bg-ink-800 text-white text-sm font-semibold px-4 py-2 transition-colors">Cari</button>
@@ -26,7 +26,7 @@
         @endif
     </form>
 
-    <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden">
+    <div class="rounded-xl bg-white border border-ink-100 shadow-paper overflow-hidden dark:bg-slate-900 dark:border-slate-700">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead>
