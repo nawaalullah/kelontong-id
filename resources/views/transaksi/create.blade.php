@@ -38,6 +38,12 @@
                             QRIS
                         </label>
                     </div>
+
+                    <div id="qrisPreview" class="mt-4 hidden rounded-xl border border-ink-100 bg-paper/40 p-4 max-w-sm dark:border-slate-700 dark:bg-slate-800/60">
+                        <p class="text-sm font-semibold text-ink-700 mb-2">Scan QRIS berikut</p>
+                        <img src="{{ asset('images/qris-sample.svg') }}" alt="QRIS" class="w-full rounded-lg border border-ink-100 bg-white p-2">
+                        <p class="text-xs text-ink-400 mt-2">Image ini sebagai preview pembayaran QRIS.</p>
+                    </div>
                 </div>
 
                 <div class="border-t border-dashed border-ink-100 pt-5 mb-3">
@@ -176,6 +182,8 @@
 
         // Toggle tampilan pilihan metode pembayaran (cash / qris)
         function refreshMetodeStyle() {
+            const qrisPreview = document.getElementById('qrisPreview');
+
             document.querySelectorAll('.metode-option').forEach(label => {
                 const radio = label.querySelector('.metode-radio');
                 if (radio.checked) {
@@ -186,6 +194,12 @@
                     label.classList.add('border-ink-100', 'text-ink-500');
                 }
             });
+
+            if (document.querySelector('input[name="metode_pembayaran"]:checked')?.value === 'qris') {
+                qrisPreview.classList.remove('hidden');
+            } else {
+                qrisPreview.classList.add('hidden');
+            }
         }
 
         document.querySelectorAll('.metode-radio').forEach(radio => {
