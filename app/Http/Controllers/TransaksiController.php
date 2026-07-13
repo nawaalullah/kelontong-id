@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+
 class TransaksiController extends Controller
 {
     public function index(Request $request): View
