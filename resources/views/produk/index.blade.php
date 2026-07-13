@@ -77,6 +77,8 @@
                             </td>
                             <td class="px-5 py-3">
                                 <div class="flex justify-end gap-2">
+                                    <a href="{{ route('produk.tambah-stok', $produk) }}"
+                                       class="rounded-md border border-leaf-300 text-leaf-700 hover:bg-leaf-50 text-xs font-semibold px-3 py-1.5 transition-colors">Tambah Stok</a>
                                     <a href="{{ route('produk.edit', $produk) }}"
                                        class="rounded-md border border-mustard-300 text-mustard-700 hover:bg-mustard-50 text-xs font-semibold px-3 py-1.5 transition-colors">Edit</a>
                                     <form action="{{ route('produk.destroy', $produk) }}" method="POST"

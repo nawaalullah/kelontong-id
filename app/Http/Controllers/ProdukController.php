@@ -56,6 +56,23 @@ class ProdukController extends Controller
         return view('produk.edit', compact('produk', 'kategoris', 'suppliers'));
     }
 
+    public function showTambahStok(Produk $produk): View
+    {
+        return view('produk.tambah-stok', compact('produk'));
+    }
+
+    public function tambahStok(Request $request, Produk $produk): RedirectResponse
+    {
+        $validated = $request->validate([
+            'jumlah' => 'required|integer|min:1',
+        ]);
+
+        $produk->increment('stok', $validated['jumlah']);
+
+        return redirect()->route('produk.index')
+            ->with('success', 'Stok produk berhasil ditambah.');
+    }
+
     public function update(Request $request, Produk $produk): RedirectResponse
     {
         $validated = $request->validate([
