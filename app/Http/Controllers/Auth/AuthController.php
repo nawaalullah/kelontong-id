@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,49 +42,6 @@ class AuthController extends Controller
 
         return redirect()->intended(route('dashboard'))
             ->with('success', 'Selamat datang kembali, '.Auth::user()->name.'!');
-    }
-
-    /**
-     * Tampilkan form register.
-     */
-    public function showRegister(): View
-    {
-        return view('auth.register');
-    }
-
-    /**
-     * Proses register.
-     */
-    public function register(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ], [
-            'name.required' => 'Nama wajib diisi.',
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'email.unique' => 'Email ini sudah terdaftar.',
-            'password.required' => 'Kata sandi wajib diisi.',
-            'password.min' => 'Kata sandi minimal 8 karakter.',
-            'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
-        ]);
-
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        $request->session()->regenerate();
-
-        return redirect()->route('dashboard')
-            ->with('success', 'Akun berhasil dibuat. Selamat datang, '.$user->name.'!');
     }
 
     /**
