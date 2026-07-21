@@ -7,6 +7,7 @@ use App\Models\Produk;
 use App\Models\Supplier;
 use App\Models\Transaksi;
 use App\Models\TransaksiDetail;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -14,6 +15,13 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // User default (karena fitur registrasi sudah dihapus, akun dibuat lewat seeder)
+        User::create([
+            'name' => 'Admin Kelontong',
+            'email' => 'admin@kelontong.id',
+            'password' => '12345', // otomatis di-hash lewat cast di model User
+        ]);
+
         // Kategori
         $sembako = Kategori::create(['nama_kategori' => 'Sembako', 'deskripsi' => 'Kebutuhan pokok sehari-hari']);
         $minuman = Kategori::create(['nama_kategori' => 'Minuman', 'deskripsi' => 'Minuman kemasan']);
