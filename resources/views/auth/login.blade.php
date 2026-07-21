@@ -34,7 +34,7 @@
                 id="password"
                 required
                 autocomplete="current-password"
-                placeholder="••••••••"
+                placeholder="Masukkan Kata Sandi"
                 class="w-full rounded-lg border border-ink-100 bg-paper/40 px-4 py-2.5 text-sm text-ink-700 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-mustard-400 focus:border-mustard-400 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-100"
             >
         </div>
