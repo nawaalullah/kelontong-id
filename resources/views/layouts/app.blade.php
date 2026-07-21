@@ -158,14 +158,45 @@
                         <h1 class="font-display text-xl sm:text-2xl font-semibold text-ink-700 dark:text-slate-100 truncate">@yield('title', 'Dashboard')</h1>
                     </div>
                 </div>
-                <button id="themeToggleBtn"
-                        type="button"
-                        onclick="toggleTheme()"
-                        class="inline-flex items-center justify-center rounded-full border border-ink-200 bg-white/90 text-ink-700 p-2 shadow-sm transition hover:bg-mustard-50 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-100 dark:hover:bg-slate-700/80"
-                        aria-label="Toggle dark mode">
-                    <span data-light class="text-lg">🌙</span>
-                    <span data-dark class="hidden text-lg">☀️</span>
-                </button>
+                <div class="flex items-center gap-3">
+                    <button id="themeToggleBtn"
+                            type="button"
+                            onclick="toggleTheme()"
+                            class="inline-flex items-center justify-center rounded-full border border-ink-200 bg-white/90 text-ink-700 p-2 shadow-sm transition hover:bg-mustard-50 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-100 dark:hover:bg-slate-700/80"
+                            aria-label="Toggle dark mode">
+                        <span data-light class="text-lg">🌙</span>
+                        <span data-dark class="hidden text-lg">☀️</span>
+                    </button>
+
+                    @auth
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.outside="open = false"
+                                    class="flex items-center gap-2 rounded-full border border-ink-200 bg-white/90 pl-1 pr-3 py-1 shadow-sm transition hover:bg-mustard-50 dark:border-slate-700 dark:bg-slate-800/90 dark:hover:bg-slate-700/80">
+                                <span class="w-7 h-7 rounded-full bg-mustard-400 flex items-center justify-center text-xs font-semibold text-ink-800">
+                                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                </span>
+                                <span class="hidden sm:block text-sm font-medium text-ink-700 dark:text-slate-100 max-w-[120px] truncate">
+                                    {{ auth()->user()->name }}
+                                </span>
+                            </button>
+
+                            <div x-show="open" x-cloak
+                                 class="absolute right-0 mt-2 w-48 rounded-lg border border-ink-100 bg-white shadow-paper py-1 dark:border-slate-700 dark:bg-slate-800">
+                                <div class="px-4 py-2 border-b border-ink-100 dark:border-slate-700">
+                                    <p class="text-sm font-medium text-ink-700 dark:text-slate-100 truncate">{{ auth()->user()->name }}</p>
+                                    <p class="text-xs text-ink-400 dark:text-slate-400 truncate">{{ auth()->user()->email }}</p>
+                                </div>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                            class="w-full text-left px-4 py-2 text-sm text-clay-600 hover:bg-clay-50 dark:hover:bg-slate-700/60">
+                                        Keluar
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @endauth
+                </div>
             </header>
 
             <main class="flex-1 px-4 sm:px-8 py-6 sm:py-8">
